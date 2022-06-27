@@ -3,11 +3,15 @@ package com.tyrantlucifer.batch
 import org.apache.flink.api.scala.ExecutionEnvironment
 import org.apache.flink.api.scala._
 
-object WordCount {
+object WordCountExample {
   def main(args: Array[String]): Unit = {
     // 创建批处理运行环境
     val environment = ExecutionEnvironment.getExecutionEnvironment
-    val path = "D:\\CodeProjects\\Java\\flink-practice\\src\\main\\resources\\data.txt"
+
+    // 获取文件路径
+    val path = this.getClass.getClassLoader.getResource("data.txt").getPath
+
+    // 执行job
     environment.readTextFile(path)
       .flatMap(_.split(" "))
       .map((_, 1))

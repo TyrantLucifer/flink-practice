@@ -1,15 +1,13 @@
-package com.tyrantlucifer.stream
+package com.tyrantlucifer.stream.source
 
-import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 import org.apache.flink.streaming.api.scala._
 
-
-object WordCount {
+object SocketSource {
   def main(args: Array[String]): Unit = {
     // 获取流处理运行环境
     val environment = StreamExecutionEnvironment.getExecutionEnvironment
 
-    // 处理源源不断的流数据
+    // 获取socket数据
     environment.socketTextStream("hadoop001", 7777)
       .flatMap(_.split(" "))
       .filter(_.nonEmpty)
